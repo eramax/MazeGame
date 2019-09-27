@@ -4,12 +4,14 @@ namespace MazeClient
 {
     public static class Helpers
     {
+        // Finding the correct x&y inside the maze with room id
         public static (int, int) ToPoint(int idx, int size)
         {
             int x = idx / size;
             int y = idx % size;
             return (x, y);
         }
+        // Loops untill reading an int from the user
         public static bool ConsoleReadInt(string message, out int num)
         {
             Console.Write(message);
@@ -23,6 +25,7 @@ namespace MazeClient
                 return ConsoleReadInt(message, out num);
             }
         }
+        // Loops untill reading an character from the user
 
         public static bool ConsoleReadChar(string message, out char ch)
         {
@@ -38,6 +41,7 @@ namespace MazeClient
                 return ConsoleReadChar(message, out ch);
             }
         }
+        // writes a message within a specific space in console with a specified color
         public static void ConsoleWrite(string message, int padding, ConsoleColor color)
         {
             Console.ForegroundColor = color;

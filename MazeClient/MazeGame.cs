@@ -12,7 +12,6 @@ namespace MazeClient
             game.Play();
             Console.ReadLine();
             Console.ReadLine();
-
         }
     }
 }

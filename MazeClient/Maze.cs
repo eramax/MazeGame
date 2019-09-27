@@ -4,11 +4,14 @@ namespace MazeClient
 {
     public class Maze
     {
+        // Maze size
         public int Size { get; set; }
-
-        public IMazeIntegration MazeIntegration { get; set; }
+        // Maze Rooms
         char[,] Rooms;
+        // Maze Enterance
         public int Enterance { get; set; }
+
+        // Setup a maze with its size and its enterance
         public Maze(int size, int enterance)
         {
             Size = size;
@@ -16,6 +19,7 @@ namespace MazeClient
             Enterance = enterance;
             SetRoom(enterance, 'A');
         }
+        // Set room status with a character
         public void SetRoom(int id, char ch)
         {
             if (id >= Size * Size) return;
@@ -23,6 +27,7 @@ namespace MazeClient
             Rooms[point.Item1, point.Item2] = ch;
         }
 
+        // Print the Maze and highlight the currect room
         public void ConsolePrint(int current)
         {
             Console.ForegroundColor = ConsoleColor.Green;

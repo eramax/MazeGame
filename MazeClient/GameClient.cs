@@ -18,6 +18,7 @@ namespace MazeClient
         {
             MazeService = service;
         }
+        // Load the game and build the maze and loop for user moves
         public void Play()
         {
             //Reading the size
@@ -31,6 +32,7 @@ namespace MazeClient
             VisitedMaze.ConsolePrint(CurrentRoom);
             while (AskToMove()) ;
         }
+        // Loop for any user move actions untill hitting treasure or loosing the whole score or hitting x for exit
         public bool AskToMove()
         {
             PrintInfo();
@@ -55,17 +57,20 @@ namespace MazeClient
                 }
                 if (PlayerScore <= 0)
                 {
-                    Console.WriteLine("Your score is 0, Game Over.");
+                    Console.WriteLine("Your score is 0, Your Total Steps are {0}, Game Over.", PlayerSteps);
                     return false;
                 }
             }else Console.WriteLine("Wrong Input");
 
             return true;
         }
+        // printing out the score and steps count
         public void PrintInfo()
         {
             Console.WriteLine("SCORE : {0}, STEPS : {1}", PlayerScore, PlayerSteps);
         }
+        // Move action handler 
+        // It uses the Maze integration service for fetching the room data 
         public void Move(int id, char direction)
         {
             string dir = direction.ToString().ToUpper();
@@ -100,6 +105,7 @@ namespace MazeClient
                 VisitedMaze.SetRoom(CurrentRoom, 'X');
 
         }
+        // this reset all allowed directions for a new room
         public void ResetAllowedDirections()
         {
             AllowedDirections = new Dictionary<string, bool>();
@@ -108,6 +114,7 @@ namespace MazeClient
             AllowedDirections.Add("W", true);
             AllowedDirections.Add("E", true);
         }
+        // Disable a direction form the current room
         public void DisallowDirection(string dir)
         {
             AllowedDirections[dir] = false;
