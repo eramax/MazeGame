@@ -10,7 +10,7 @@
 
         public bool CausesInjury(int roomId)
         {
-            return roomId % 5 == 0;
+            return roomId % 4 == 0;
         }
 
         public string GetDescription(int roomId)
@@ -20,7 +20,7 @@
 
         public int GetEntranceRoom()
         {
-            return 14;
+            return Size * Size / 2;
         }
 
         public int? GetRoom(int roomId, char direction)
@@ -56,7 +56,7 @@
 
         public bool HasTreasure(int roomId)
         {
-            return roomId == 39;
+            return roomId == Size* 2 + 1;
         }
     }
 }

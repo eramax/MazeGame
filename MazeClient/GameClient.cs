@@ -8,7 +8,7 @@ namespace MazeClient
         public IMazeIntegration MazeService { get; set; }
         public int PlayerScore { get; set; }
         public int PlayerSteps { get; set; }
-
+        public int Enterance { get; set; }
         public Maze VisitedMaze { get; set; }
         public int CurrentRoom { get; set; }
         Dictionary<string, bool> AllowedDirections { get; set; }
@@ -24,7 +24,7 @@ namespace MazeClient
             Helpers.ConsoleReadInt("Enter Maze Size : ", out int MazeSize);
             PlayerScore = 10;
             MazeService.BuildMaze(MazeSize);
-            var Enterance = MazeService.GetEntranceRoom();
+            Enterance = MazeService.GetEntranceRoom();
             VisitedMaze = new Maze(MazeSize, Enterance);
             ResetAllowedDirections();
             CurrentRoom = Enterance;
@@ -44,18 +44,22 @@ namespace MazeClient
 
             Helpers.ConsoleReadChar(question, out var dir);
             if (dir == 'X' || dir == 'x') return false;
-            Move(CurrentRoom, dir);
-            VisitedMaze.ConsolePrint(CurrentRoom);
-            if (Won)
+            if(AllowedDirections.TryGetValue(dir.ToString().ToUpper(),out var allowed) && allowed)
             {
-                Console.WriteLine("Conguratulations you found the Treasure.");
-                return false;
-            }
-            if (PlayerScore <= 0)
-            {
-                Console.WriteLine("Your score is 0, Game Over.");
-                return false;
-            }
+                Move(CurrentRoom, dir);
+                VisitedMaze.ConsolePrint(CurrentRoom);
+                if (Won)
+                {
+                    Console.WriteLine("Conguratulations you found the Treasure.");
+                    return false;
+                }
+                if (PlayerScore <= 0)
+                {
+                    Console.WriteLine("Your score is 0, Game Over.");
+                    return false;
+                }
+            }else Console.WriteLine("Wrong Input");
+
             return true;
         }
         public void PrintInfo()
@@ -82,6 +86,7 @@ namespace MazeClient
 
             Console.WriteLine("[Room Description: {0} ]", RoomDesc);
 
+
             if (isTrap) { 
                 VisitedMaze.SetRoom(CurrentRoom, 'O');
                 Console.WriteLine("You trapped and your score has been decreased by one.");
@@ -90,7 +95,8 @@ namespace MazeClient
             {
                 VisitedMaze.SetRoom(CurrentRoom, '€');
                 Won = true;
-            }else
+            }
+            else if(CurrentRoom != Enterance)
                 VisitedMaze.SetRoom(CurrentRoom, 'X');
 
         }

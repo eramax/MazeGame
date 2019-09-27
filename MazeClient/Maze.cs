@@ -8,10 +8,12 @@ namespace MazeClient
 
         public IMazeIntegration MazeIntegration { get; set; }
         char[,] Rooms;
+        public int Enterance { get; set; }
         public Maze(int size, int enterance)
         {
             Size = size;
             Rooms = new char[size,size];
+            Enterance = enterance;
             SetRoom(enterance, 'A');
         }
         public void SetRoom(int id, char ch)
@@ -29,7 +31,10 @@ namespace MazeClient
                 for (int j = 0;j<Size;j++)
                 {
                     var room = Rooms[i, j];
-                    if (i * Size + j == current)
+                    var roomId = i * Size + j;
+                    if (roomId == current) {
+                        if (roomId == Enterance) { Helpers.ConsoleWrite("$", 2, ConsoleColor.DarkMagenta); continue; }
+
                         switch (room)
                         {
                             case 'A': Helpers.ConsoleWrite("$", 2, ConsoleColor.DarkMagenta); break;
@@ -38,7 +43,7 @@ namespace MazeClient
                             case '€': Helpers.ConsoleWrite("$", 2, ConsoleColor.DarkBlue); break;
 
                         }
-
+                    }
                     else {
                         switch (room)
                         {

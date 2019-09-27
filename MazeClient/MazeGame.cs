@@ -11,6 +11,8 @@ namespace MazeClient
             var game = new GameClient(kernal.Get<IMazeIntegration>());
             game.Play();
             Console.ReadLine();
+            Console.ReadLine();
+
         }
     }
 }
