@@ -8,7 +8,7 @@ namespace MazeClient
         public IMazeIntegration MazeService { get; set; }
         public int PlayerScore { get; set; }
         public int PlayerSteps { get; set; }
-        public int Enterance { get; set; }
+        int Enterance { get; set; }
         public Maze VisitedMaze { get; set; }
         public int CurrentRoom { get; set; }
         Dictionary<string, bool> AllowedDirections { get; set; }

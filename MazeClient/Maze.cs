@@ -5,11 +5,11 @@ namespace MazeClient
     public class Maze
     {
         // Maze size
-        public int Size { get; set; }
+        int Size { get; set; }
         // Maze Rooms
-        char[,] Rooms;
+        char[,] Rooms { get; set; }
         // Maze Enterance
-        public int Enterance { get; set; }
+        int Enterance { get; set; }
 
         // Setup a maze with its size and its enterance
         public Maze(int size, int enterance)
